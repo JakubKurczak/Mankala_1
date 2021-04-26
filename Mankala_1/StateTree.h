@@ -30,6 +30,9 @@ public:
 		std::shared_ptr<StateNode> curr_node = std::make_shared<StateNode>(parent, board,move_chooser,chosen_move);
 		parent->add_child(curr_node);
 
+		if (curr_node->get_another_move())
+			move_chooser = curr_node->get_state().get_opposite_player(move_chooser);
+
 		auto possible_moves = curr_node->get_state().get_possible_moves(move_chooser);
 		if (tree_depth > 0) {			
 			for (int move : possible_moves) {

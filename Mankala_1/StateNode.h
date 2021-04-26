@@ -3,8 +3,6 @@
 #include <vector>
 
 
-//its not a binary tree because evaluation of the children comes after we add them
-//its not tremendously important info, more of a observation
 class StateNode {
 private:
 	std::shared_ptr<StateNode> parent;
@@ -21,12 +19,16 @@ public:
 
 	}
 
-
+	//move chooser is for minmax
+	//its person that will choose next move
+	//but current state is made by opposite player
 	StateNode(std::shared_ptr<StateNode> parent, Board& board, std::shared_ptr<Player> move_chooser, int chosen_move) : state(board), parent{ parent }, move_chooser{ move_chooser }, made_move{chosen_move}{
 		another_move = this->state.make_move(chosen_move, this->state.get_opposite_player(move_chooser));
 	}
 	
-	
+	bool get_another_move() {
+		return another_move;
+	}
 
 	~StateNode()
 	{
@@ -57,8 +59,9 @@ public:
 		return made_move;
 	}
 
+	//this is very simple to be sure that everything else works properly
 	int get_quality_from_perspective(std::shared_ptr<Player> player) {
-		return state.get_quality(player);
+		return state.get_quality(player) - state.get_quality(state.get_opposite_player(player));
 	}
 
 
