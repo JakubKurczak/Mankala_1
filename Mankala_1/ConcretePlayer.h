@@ -11,7 +11,7 @@ public:
 
 	}
 
-	int get_move(std::shared_ptr<Board> board) {
+	int get_move(std::shared_ptr<Board> board, std::shared_ptr<Player> player) {
 		while (true) {
 			std::cout << this->get_name() << ": ";
 			char choice;
@@ -22,6 +22,10 @@ public:
 			}
 
 		}
+	}
+	~ConcretePlayer()
+	{
+
 	}
 
 };

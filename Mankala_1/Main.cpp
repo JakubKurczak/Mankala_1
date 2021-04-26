@@ -1,7 +1,7 @@
 #include <iostream>
 #include "ConcretePlayer.h"
 #include "Board.h"
-
+#include "AI_Player.h"
 constexpr auto DEBUG_MODE = true;
 
 void draw_board() {
@@ -42,7 +42,7 @@ void game(std::shared_ptr<Player> player_1, std::shared_ptr<Player> player_2) {
 
         board->show_board();
 
-        int move = current_player->get_move(board);
+        int move = current_player->get_move(board, current_player);
 
         bool next_move = board->make_move(move, current_player);
 
@@ -83,7 +83,7 @@ int main()
                 break;
 
             case 2:
-                player_vs_ai();
+                game(std::make_shared<ConcretePlayer>("jakub"), std::make_shared<AI_Player>("robot"));
                 break;
             case 3:
                 ai_vs_ai();

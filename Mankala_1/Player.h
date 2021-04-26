@@ -29,7 +29,7 @@ public:
 
 	}
 
-	virtual int get_move(std::shared_ptr<Board> board)=0;
+	virtual int get_move(std::shared_ptr<Board> board, std::shared_ptr<Player> player) =0;
 
 	std::string get_name() {
 		return this->name;

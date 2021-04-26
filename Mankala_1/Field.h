@@ -21,7 +21,8 @@ public:
 
 	}
 
-	Field(Field& other) : owner{ other.owner }, value{ other.value }{
+	Field(Field& other) : owner{ other.owner }, value{ other.value }, index{ other.index }, is_well{other.is_well}
+	{
 
 	}
 

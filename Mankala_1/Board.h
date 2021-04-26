@@ -4,24 +4,50 @@
 #include <memory>
 #include "Player.h"
 #include "Field.h"
+#include <vector>
 
 class Board {
 private:
 
 	std::shared_ptr<Player> players[2];
 	std::shared_ptr<Field> field;
+
 public:
 
 	Board(std::shared_ptr<Player> player_1, std::shared_ptr<Player> player_2) : players{ player_1,player_2 } {
 		init_board();
 	}
 
+	Board(Board& other) : players{other.players[0],other.players[1]} {
+		
+		auto other_field = other.field;
+		field = std::make_shared<Field>(*other_field);
+		auto previous = field;
+
+		other_field = other_field->get_next();
+
+		auto cur_field = std::make_shared<Field>(*other_field);
+		previous->set_next(cur_field);
+
+		previous = cur_field;
+		while (other_field != other.field) {			
+			
+			cur_field = std::make_shared<Field>(*other_field);
+			previous->set_next(cur_field);
+			previous = cur_field;
+
+			other_field = other_field->get_next();
+		}
+
+		previous->set_next(field);
+	}
+
+
 	~Board()
 	{
 
 	}
 
-	//check for sure if its ok
 	void init_board() {
 
 		field = std::make_shared<Field>(players[0], 4, false, 1);
@@ -149,7 +175,7 @@ public:
 	}
 
 	bool is_legal_move(int move, Player* player) {
-		if (move == 0)
+		if (move == 0 || move > 6)
 			return false;
 		else if (this->get_field(move, player)->get_value() == 0)
 			return false;
@@ -173,6 +199,19 @@ public:
 		}
 
 		return this->get_field(0, players[0])->get_value() > this->get_field(0, players[1])->get_value() ? players[0] : players[1];
+	}
+
+	std::vector<int> get_possible_moves(std::shared_ptr<Player> player) {
+		std::vector<int> possible_moves;
+		for (int ii = 1; ii < 7; ii++)
+			if (this->is_legal_move(ii, player.get()))
+				possible_moves.push_back(ii);
+		return possible_moves;
+	}
+
+	//very basic
+	int get_quality(std::shared_ptr<Player> player) {
+		return this->get_field(0,player)->get_value();
 	}
 };
 

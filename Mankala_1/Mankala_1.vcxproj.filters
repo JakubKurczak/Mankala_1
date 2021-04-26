@@ -27,12 +27,24 @@
     <ClInclude Include="ConcretePlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StateNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ConcretePlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
