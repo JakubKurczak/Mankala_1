@@ -144,8 +144,6 @@
     <ClInclude Include="ConcretePlayer.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="StateNode.h" />
-    <ClInclude Include="StateTree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AI_Player.cpp" />

@@ -1,8 +1,10 @@
 #include <iostream>
+#include <conio.h>
 #include "ConcretePlayer.h"
 #include "Board.h"
 #include "AI_Player.h"
 constexpr auto DEBUG_MODE = true;
+
 
 void draw_board() {
     std::cout << "           [6]   [5]   [4]   [3]   [2]   [1]   " << std::endl;
@@ -33,11 +35,12 @@ void ai_vs_ai() {
 }
 
 void game(std::shared_ptr<Player> player_1, std::shared_ptr<Player> player_2) {
-
-    std::shared_ptr<Player> players[] = { player_1, player_2 };
-    std::shared_ptr<Player> current_player = player_1;
-    std::shared_ptr<Board> board = std::make_shared<Board>(player_1, player_2);
     std::system("cls");
+    srand(time(NULL));
+    std::shared_ptr<Player> players[] = { player_1, player_2 };
+    std::shared_ptr<Player> current_player = players[rand()%2];
+    std::cout << "Game starts from Player...: " << current_player->get_name() << "!"<<std::endl;
+    std::shared_ptr<Board> board = std::make_shared<Board>(player_1, player_2);
     while (board->has_move(current_player)) {
 
         board->show_board();
@@ -86,7 +89,7 @@ int main()
                 game(std::make_shared<ConcretePlayer>("jakub"), std::make_shared<AI_Player>("robot"));
                 break;
             case 3:
-                ai_vs_ai();
+                game(std::make_shared<AI_Player>("robot_1"), std::make_shared<AI_Player>("robot_2"));
                 break;
             case 4:
                 proceed = false;

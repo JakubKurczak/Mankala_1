@@ -27,12 +27,6 @@
     <ClInclude Include="ConcretePlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateTree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AI_Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>

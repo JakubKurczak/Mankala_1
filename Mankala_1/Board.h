@@ -211,7 +211,14 @@ public:
 
 	//very basic
 	int get_quality(std::shared_ptr<Player> player) {
-		return this->get_field(0,player)->get_value();
+		return this->get_field(0,player)->get_value() - this->get_field(0,this->get_opposite_player(player))->get_value();
+	}
+
+	int get_quality(std::string name) {
+
+		std::shared_ptr<Player> player = name == this->players[0]->get_name() ? this->players[0] : this->players[1];
+
+		return this->get_field(0, player)->get_value() - this->get_field(0, this->get_opposite_player(player))->get_value();
 	}
 };
 
